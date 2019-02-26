@@ -12,8 +12,9 @@
     - group: root
     - mode: 644
 
-/etc/kubernetes/cert/ca.pem:
+ca-pub-pem:
   file.managed:
+    - name: /etc/kubernetes/cert/ca.pem
     - source: salt://modules/k8s/ca-build/files/ca.pem
     - user: root
     - group: root
@@ -32,7 +33,7 @@ flanneld_to_etcd:
     - name: . /etc/kubernetes/bin/flanneld-to-etcd.sh
     - unless: /etc/kubernetes/bin/etcdctl --endpoints={{ salt['config.get']('k8s-common-config:etcd:endpoints') }} --ca-file=/etc/kubernetes/cert/ca.pem --cert-file=/etc/kubernetes/cert/flanneld.pem --key-file=/etc/kubernetes/cert/flanneld-key.pem get /kubernetes/network/config
     - require:
-      - file: /etc/kubernetes/cert/ca.pem
+      - file: ca-pub-pem
 
 flanneld-service:
   file.managed:
