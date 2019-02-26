@@ -1,0 +1,10 @@
+apiVersion: kubeproxy.config.k8s.io/v1alpha1
+bindAddress: {{ salt['config.get']('IP') }}
+clientConnection:
+  kubeconfig: /etc/kubernetes/kube-proxy.kubeconfig
+clusterCIDR: {{ salt['config.get']('k8s-common-config:cluster:service_cidr') }}
+healthzBindAddress: {{ salt['config.get']('IP') }}:10256
+hostnameOverride: {{ salt['config.get']('NAME') }}
+kind: KubeProxyConfiguration
+metricsBindAddress: {{ salt['config.get']('IP') }}:10249
+mode: "ipvs"

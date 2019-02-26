@@ -1,0 +1,3 @@
+#!/bin/bash
+
+cd /etc/kubernetes/ && /etc/kubernetes/bin/kubectl config set-cluster kubernetes --certificate-authority=/etc/kubernetes/cert/ca.pem --embed-certs=true --server={{ salt['config.get']('k8s-common-config:apiserver:https') }} --kubeconfig=kube-proxy.kubeconfig && /etc/kubernetes/bin/kubectl config set-credentials kube-proxy --client-certificate=/etc/kubernetes/cert/kube-proxy.pem --client-key=/etc/kubernetes/cert/kube-proxy-key.pem --embed-certs=true --kubeconfig=kube-proxy.kubeconfig && /etc/kubernetes/bin/kubectl config set-context default --cluster=kubernetes --user=kube-proxy --kubeconfig=kube-proxy.kubeconfig && /etc/kubernetes/bin/kubectl config use-context default --kubeconfig=kube-proxy.kubeconfig
