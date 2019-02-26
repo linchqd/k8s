@@ -1,19 +1,25 @@
 # salt modules k8s
-  # 通过salt来部署k8s高可用集群
+  通过salt来部署k8s高可用集群
+# 环境：
+  三台master通过keepalived+haproxy实现三节点高可用:
+  
+    192.168.0.11 k8s-master-1.cqt.com k8s-master-1
+  
+    192.168.0.12 k8s-master-2.cqt.com k8s-master-2
+  
+    192.168.0.13 k8s-master-3.cqt.com k8s-master-3
+  
+  三台node节点:
+  
+    192.168.0.21 k8s-node-1.cqt.com k8s-node-1
+  
+    192.168.0.22 k8s-node-2.cqt.com k8s-node-2
+  
+    192.168.0.23 k8s-node-3.cqt.com k8s-node-3
+        
+  keepalived为api-server提供的vip为: 192.168.0.15 haproxy通过监听8443来为api-server提供负载均衡
 
-  环境：
-    三台master通过keepalived+haproxy实现三节点高可用:
-        192.168.0.11 k8s-master-1.cqt.com k8s-master-1
-        192.168.0.12 k8s-master-2.cqt.com k8s-master-2
-        192.168.0.13 k8s-master-3.cqt.com k8s-master-3
-    三台node节点:
-        192.168.0.21 k8s-node-1.cqt.com k8s-node-1
-        192.168.0.22 k8s-node-2.cqt.com k8s-node-2
-        192.168.0.23 k8s-node-3.cqt.com k8s-node-3
-
-    keepalived为api-server提供的vip为: 192.168.0.15 haproxy通过监听8443来为api-server提供负载均衡
-
-    所有机器使用centos7.4 1708 64位的系统
+  所有机器使用centos7.4 1708 64位的系统
 
   # 部署步骤
 
