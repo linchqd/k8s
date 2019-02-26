@@ -1,5 +1,12 @@
 # salt modules k8s
-  通过salt来部署k8s高可用集群
+
+  kubernetes版本: 1.11.1
+  
+  etcd版本: v3.3.12
+  
+  flanneld版本: v0.11.0
+  
+  docker版本: 18.03.1-ce
 # 环境：
     三台master通过keepalived+haproxy实现三节点高可用:
   
