@@ -1,0 +1,10 @@
+IP:
+  "192.168.0.23"
+NAME:
+  "k8s-node-3"
+HOSTNAME:
+  "k8s-node-3.cqt.com"
+INTERFACE:
+  "ens33"
+TOKEN:
+  "xm30qa.imtuaqv7kj85rnrv"

@@ -1,0 +1,10 @@
+IP:
+  "192.168.0.21"
+NAME:
+  "k8s-node-1"
+HOSTNAME:
+  "k8s-node-1.cqt.com"
+INTERFACE:
+  "eth0"
+TOKEN:
+  "cwh0ff.muudf01mj8kmh7k3"

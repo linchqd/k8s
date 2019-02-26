@@ -1,0 +1,32 @@
+# Sample salt-ssh config file
+#web1:
+#  host: 192.168.42.1 # The IP addr or DNS hostname
+#  user: fred         # Remote executions will be executed as user fred
+#  passwd: foobarbaz  # The password to use for login, if omitted, keys are used
+#  sudo: True         # Whether to sudo to root, not enabled by default
+#web2:
+#  host: 192.168.42.2
+k8s-master-1:
+  host: 192.168.0.11
+  user: root
+  passwd: linchqd930520
+k8s-master-2:
+  host: 192.168.0.12
+  user: root
+  passwd: linchqd930520
+k8s-master-3:
+  host: 192.168.0.13
+  user: root
+  passwd: linchqd930520
+k8s-node-1:
+  host: 192.168.0.21
+  user: root
+  passwd: linchqd930520
+k8s-node-2:
+  host: 192.168.0.22
+  user: root
+  passwd: linchqd930520
+k8s-node-3:
+  host: 192.168.0.23
+  user: root
+  passwd: linchqd930520
