@@ -1,0 +1,2 @@
+#!/bin/bash
+/etc/kubernetes/bin/etcdctl --endpoints={{ salt['config.get']('k8s-common-config:etcd:endpoints') }} --ca-file=/etc/kubernetes/cert/ca.pem --cert-file=/etc/kubernetes/cert/flanneld.pem --key-file=/etc/kubernetes/cert/flanneld-key.pem set /kubernetes/network/config '{"Network":"'{{ salt['config.get']('k8s-common-config:cluster:service_cidr') }}'", "SubnetLen": 24, "Backend": {"Type": "vxlan"}}'
