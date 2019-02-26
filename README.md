@@ -32,7 +32,7 @@
 
     准备一个salt master,并安装git,下载源码:
 
-    cd /srv/salt/ && git clone https://github.com/linchqd/k8s.git
+    mkdir /srv/salt/modules/ -p && cd /srv/salt/modules && git clone https://github.com/linchqd/k8s.git
 
     根据实际修改k8s/master k8s/roster k8s/pillar/目录下文件并配置salt
      
