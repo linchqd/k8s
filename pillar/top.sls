@@ -1,6 +1,5 @@
 base:
   '*':
-    - k8s-config
     - k8s-common-config
   'k8s-master-1':
     - k8s-master-1
