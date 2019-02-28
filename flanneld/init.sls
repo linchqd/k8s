@@ -1,3 +1,11 @@
+k8s-cert-dir:
+  file.directory:
+    - name: /etc/kubernetes/cert
+    - user: root
+    - group: root
+    - mode: 755
+    - mkdirs: True
+
 /etc/kubernetes/cert/flanneld-key.pem:
   file.managed:
     - source: salt://modules/k8s/flanneld/files/flanneld-key.pem
