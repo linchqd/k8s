@@ -121,5 +121,6 @@
     
     # coredns
       salt-ssh 'k8s-master-1' state.sls modules.k8s.k8s-plugins.coredns
-    
+    # dashboard
+      salt-ssh 'k8s-master-1' state.sls modules.k8s.k8s-plugins.dashboard
     
