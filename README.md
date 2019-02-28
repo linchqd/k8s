@@ -112,3 +112,30 @@
         salt-ssh -E 'k8s-node-[123]' state.sls modules.k8s.node
 
         在master上kubectl get nodes查看node状态
+
+  # 插件部署
+    把三台master也运行为node,方法参考wokr节点部署。然后给三台master打上不调度的污点，命令:
+      /etc/kubernetes/bin/kubectl taint nodes k8s-master-1 node-role.kubernetes.io/master=:NoSchedule
+      /etc/kubernetes/bin/kubectl taint nodes k8s-master-2 node-role.kubernetes.io/master=:NoSchedule
+      /etc/kubernetes/bin/kubectl taint nodes k8s-master-3 node-role.kubernetes.io/master=:NoSchedule
+    
+    # coredns
+      salt-ssh 'k8s-master-1' state.sls modules.k8s.k8s-plugins.coredns
+    # dashboard
+      salt-ssh 'k8s-master-1' state.sls modules.k8s.k8s-plugins.dashboard
+      获取登陆token:
+      kubectl describe secret/$(kubectl get secret -n kube-system | grep dashboard-admin | awk '{print $1}') -n kube-system | grep token | tail -1 | awk '{print $2}'
+      配置文件访问登陆：
+
+      添加集群：
+      kubectl config set-cluster kubernetes --server=https://192.168.10.25:6443 --certificate-authority=/etc/kubernetes/pki/ca.crt --embed-certs=true --kubeconfig=/tmp/dashboard-admin
+      添加用户：
+      kubectl config set-credentials dashboard-admin --token=$(kubectl describe secret/$(kubectl get secret -n kube-system | grep dashboard-admin | awk '{print $1}') -n kube-system | grep token | tail -1 | awk '{print $2}') --kubeconfig=/tmp/dashboard-admin
+      添加上下文：
+      kubectl config set-context dashboard-admin@kubernetes --cluster=kubernetes --user=dashboard-admin --kubeconfig=/tmp/dashboard-admin
+      使用创建的上下文：
+      kubectl config use-context dashboard-admin@kubernetes --kubeconfig=/tmp/dashboard-admin
+      检查下/tmp/dashboard-admin：
+      kubectl config view --kubeconfig=/tmp/dashboard-admin
+
+      将/tmp/dashboard-admin拷贝出来就可以使用配置文件方式访问。
