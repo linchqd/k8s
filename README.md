@@ -112,3 +112,13 @@
         salt-ssh -E 'k8s-node-[123]' state.sls modules.k8s.node
 
         在master上kubectl get nodes查看node状态
+
+  # coredns plugin
+    为了把coredns运行在master上，把三台master运行为node,方法参考wokr节点部署。然后给三台master打上污点，命令:
+      kubectl taint nodes k8s-master-1 node-role.kubernetes.io/master=:NoSchedule
+      kubectl taint nodes k8s-master-2 node-role.kubernetes.io/master=:NoSchedule
+      kubectl taint nodes k8s-master-3 node-role.kubernetes.io/master=:NoSchedule
+    salt-ssh 'k8s-master-1' state.sls modules.k8s.k8s-plugins.coredns
+    
+    
+    
