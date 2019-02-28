@@ -113,13 +113,13 @@
 
         在master上kubectl get nodes查看node状态
 
-  # 把master运行为node 
-    把三台master也运行为node,方法参考wokr节点部署。然后给三台master打上污点，命令:
-      kubectl taint nodes k8s-master-1 node-role.kubernetes.io/master=:NoSchedule
-      kubectl taint nodes k8s-master-2 node-role.kubernetes.io/master=:NoSchedule
-      kubectl taint nodes k8s-master-3 node-role.kubernetes.io/master=:NoSchedule
-      
-    salt-ssh 'k8s-master-1' state.sls modules.k8s.k8s-plugins.coredns
+  # 插件部署
+    把三台master也运行为node,方法参考wokr节点部署。然后给三台master打上不调度的污点，命令:
+      /etc/kubernetes/bin/kubectl taint nodes k8s-master-1 node-role.kubernetes.io/master=:NoSchedule
+      /etc/kubernetes/bin/kubectl taint nodes k8s-master-2 node-role.kubernetes.io/master=:NoSchedule
+      /etc/kubernetes/bin/kubectl taint nodes k8s-master-3 node-role.kubernetes.io/master=:NoSchedule
     
+    # coredns
+      salt-ssh 'k8s-master-1' state.sls modules.k8s.k8s-plugins.coredns
     
     
