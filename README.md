@@ -109,6 +109,6 @@
         # kube-proxy
           cd /srv/salt/modules/k8s/kube-proxy/files/ && /srv/salt/modules/k8s/requirements/files/cfssl gencert -ca=/srv/salt/modules/k8s/ca-build/files/ca.pem -ca-key=/srv/salt/modules/k8s/ca-build/files/ca-key.pem -config=/srv/salt/modules/k8s/ca-build/files/ca-config.json -profile=kubernetes kube-proxy-csr.json | /srv/salt/modules/k8s/requirements/files/cfssljson -bare kube-proxy
     
-        salt-ssh -E 'k8s-node[123]' state.sls modules.k8s.node
+        salt-ssh -E 'k8s-node-[123]' state.sls modules.k8s.node
 
         在master上kubectl get nodes查看node状态
