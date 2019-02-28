@@ -7,4 +7,4 @@ HOSTNAME:
 INTERFACE:
   "eth0"
 TOKEN:
-  "cwh0ff.muudf01mj8kmh7k3"
+  "vj6vyg.435su8wj9ya83q8t"

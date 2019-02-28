@@ -7,4 +7,4 @@ HOSTNAME:
 INTERFACE:
   "ens33"
 TOKEN:
-  "xm30qa.imtuaqv7kj85rnrv"
+  "3oncz5.mtu1kyy26h4fvere"

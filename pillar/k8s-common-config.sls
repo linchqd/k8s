@@ -28,6 +28,8 @@ k8s-common-config:
       "30000-32767"
     dns:
       "10.254.0.2"
+    domain:
+      "cluster.local."
 
   haproxy_backend:
     "k8s-master-1": "192.168.0.11:6443"

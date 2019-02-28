@@ -6,3 +6,5 @@ HOSTNAME:
   "k8s-master-3.cqt.com"
 INTERFACE:
   "eth0"
+TOKEN:
+  "rk3b8b.1ys2xmq3g0f3wqu5"
