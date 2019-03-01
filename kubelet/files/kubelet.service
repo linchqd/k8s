@@ -12,6 +12,7 @@ ExecStart=/etc/kubernetes/bin/kubelet \
   --config=/etc/kubernetes/kubelet.config.json \
   --hostname-override={{ salt['config.get']('NAME') }} \
   --pod-infra-container-image=registry.access.redhat.com/rhel7/pod-infrastructure:latest \
+  --cadvisor-port=4194
   --allow-privileged=true \
   --alsologtostderr=true \
   --logtostderr=false \
