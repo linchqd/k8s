@@ -24,6 +24,7 @@ ExecStart=/etc/kubernetes/bin/kube-controller-manager \
   --logtostderr=false \
   --log-dir=/var/log/kubernetes \
   --v=2
+  --horizontal-pod-autoscaler-use-rest-clients=true
 Restart=on
 Restart=on-failure
 RestartSec=5

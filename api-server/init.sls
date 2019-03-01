@@ -31,6 +31,20 @@ log-dir:
     - mode: 644
     - template: jinja
 
+/etc/kubernetes/cert/metrics-server-key.pem:
+  file.managed:
+    - source: salt://modules/k8s/api-server/files/metrics-server-key.pem
+    - user: root
+    - group: root
+    - mode: 644
+
+/etc/kubernetes/cert/metrics-server.pem:
+  file.managed:
+    - source: salt://modules/k8s/api-server/files/metrics-server.pem
+    - user: root
+    - group: root
+    - mode: 644
+
 api-server-service:
   file.managed:  
     - name: /etc/systemd/system/kube-apiserver.service

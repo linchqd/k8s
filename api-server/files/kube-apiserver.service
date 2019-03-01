@@ -34,6 +34,15 @@ ExecStart=/etc/kubernetes/bin/kube-apiserver \
   --audit-log-maxsize=100 \
   --audit-log-path=/var/log/kube-apiserver-audit.log \
   --event-ttl=1h \
+  --requestheader-client-ca-file=/etc/kubernetes/cert/ca.pem \
+  --requestheader-allowed-names="aggregator" \
+  --requestheader-extra-headers-prefix="X-Remote-Extra-" \
+  --requestheader-group-headers=X-Remote-Group \
+  --requestheader-username-headers=X-Remote-User \
+  --proxy-client-cert-file=/etc/kubernetes/cert/metrics-server.pem \
+  --proxy-client-key-file=/etc/kubernetes/cert/metrics-server-key.pem \
+  --runtime-config=api/all=true \
+  --enable-aggregator-routing=true \
   --alsologtostderr=true \
   --logtostderr=false \
   --log-dir=/var/log/kubernetes \

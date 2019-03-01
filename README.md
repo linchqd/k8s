@@ -61,7 +61,10 @@
 
       # 部署api-server
         根据实际修改vim /srv/salt/modules/k8s/api-server/files/kubernetes-csr.json文件
+        #如果 kube-apiserver 机器没有运行 kube-proxy，则还需要添加 --enable-aggregator-routing=true 参数
         cd /srv/salt/modules/k8s/api-server/files/ && /srv/salt/modules/k8s/requirements/files/cfssl gencert -ca=/srv/salt/modules/k8s/ca-build/files/ca.pem -ca-key=/srv/salt/modules/k8s/ca-build/files/ca-key.pem -config=/srv/salt/modules/k8s/ca-build/files/ca-config.json -profile=kubernetes kubernetes-csr.json | /srv/salt/modules/k8s/requirements/files/cfssljson -bare kubernetes
+        生成metrics-server的证书
+        cd /srv/salt/modules/k8s/api-server/files/ && /srv/salt/modules/k8s/requirements/files/cfssl gencert -ca=/srv/salt/modules/k8s/ca-build/files/ca.pem -ca-key=/srv/salt/modules/k8s/ca-build/files/ca-key.pem -config=/srv/salt/modules/k8s/ca-build/files/ca-config.json -profile=kubernetes metrics-server-csr.json | /srv/salt/modules/k8s/requirements/files/cfssljson -bare metrics-server
 
       # 部署kube-controller-manager
         根据实际修改vim /srv/salt/modules/k8s/kube-controller-manager/files/kube-controller-manager-csr.json
@@ -139,3 +142,13 @@
       kubectl config view --kubeconfig=/tmp/dashboard-admin
 
       将/tmp/dashboard-admin拷贝出来就可以使用配置文件方式访问。
+    # metrics-server
+      salt-ssh 'k8s-master-1' state.sls modules.k8s.k8s-plugins.metrics-server
+      kubectl get pods -n kube-system -o wide
+      kubectl get svc -n kube-system
+      kubectl get --raw "/apis/metrics.k8s.io/v1beta1" | jq .
+      kubectl get --raw "/apis/metrics.k8s.io/v1beta1/nodes" | jq .
+      kubectl get --raw "/apis/metrics.k8s.io/v1beta1/pods" | jq .
+      kubectl top nodes
+      kubectl top pods -n kube-system
+      
