@@ -1,0 +1,38 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: gitlab
+  namespace: default
+  labels:
+    name: gitlab
+spec:
+#  type: LoadBalancer
+  ports:
+    - name: http
+      port: 80
+      targetPort: http
+    - name: ssh
+      port: 22
+      targetPort: ssh
+  selector:
+    name: gitlab
+  clusterIP: None
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: gitlab-ce
+  namespace: default
+  labels:
+    name: gitlab
+spec:
+  type: LoadBalancer
+  ports:
+    - name: http
+      port: 80
+      targetPort: http
+    - name: ssh
+      port: 22
+      targetPort: ssh
+  selector:
+    name: gitlab

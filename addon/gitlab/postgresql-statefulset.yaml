@@ -1,0 +1,72 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: postgresql
+  namespace: default
+spec:
+  serviceName: postgresql
+  replicas: 1
+  selector:
+    matchLabels:
+      name: postgresql
+  template:
+    metadata:
+      name: postgresql
+      namespace: default
+      labels:
+        name: postgresql
+    spec:
+      containers:
+      - name: postgresql
+        image: linchqd/postgres:11
+        volumeMounts:
+        - mountPath: /pgdata
+          name: postgresql-data
+        env:
+        - name: POSTGRES_USER
+          value: gitlab
+        - name: POSTGRES_PASSWORD
+          value: passw0rd
+        - name: POSTGRES_DB
+          value: gitlab_production
+        - name: PGDATA
+          value: /pgdata
+        ports:
+        - name: postgres
+          containerPort: 5432
+#        livenessProbe:
+#          exec:
+#            command:
+#            - pg_isready
+#            - -h
+#            - localhost
+#            - -U
+#            - gitlab
+#            - -d
+#            - gitlab_production
+#          initialDelaySeconds: 30
+#          timeoutSeconds: 5
+#        readinessProbe:
+#          exec:
+#            command:
+#            - pg_isready
+#            - -h
+#            - localhost
+#            - -U
+#            - gitlab
+#            - -d
+#            - gitlab_production
+#          initialDelaySeconds: 5
+#          timeoutSeconds: 1
+  volumeClaimTemplates:
+  - metadata:
+      name: postgresql-data
+      namespace: default
+      annotations:
+        volume.beta.kubernetes.io/storage-class: "nfs-storage"
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      storageClassName: "nfs-storage"
+      resources:
+        requests:
+          storage: 30Gi
