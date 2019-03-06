@@ -1,0 +1,26 @@
+apiVersion: v1
+data:
+  traefik.toml: |
+    defaultEntryPoints = ["http","https"]
+    insecureskipverify = true
+    [entryPoints]
+      [entryPoints.http]
+      address = ":80"
+        [entryPoints.http.redirect]
+          entryPoint = "https"
+      [entryPoints.https]
+      address = ":443"
+        [entryPoints.https.tls]
+          [[entryPoints.https.tls.certificates]]
+          CertFile = "/ssl/gitlab_cqt_com.crt"
+          KeyFile = "/ssl/gitlab_cqt_com.key"
+          [[entryPoints.https.tls.certificates]]
+          CertFile = "/ssl/dashboard_cqt_com.crt"
+          KeyFile = "/ssl/dashboard_cqt_com.key"
+          [[entryPoints.https.tls.certificates]]
+          CertFile = "/ssl/traefik_cqt_com.crt"
+          KeyFile = "/ssl/traefik_cqt_com.key"
+kind: ConfigMap
+metadata:
+  name: traefik
+  namespace: kube-system

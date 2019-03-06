@@ -1,0 +1,7 @@
+apiVersion: v1
+data:
+  auth: YWRtaW46JGFwcjEkNGlVQ2hHMWskLzdSQXdHMmRlTDFWemQyOElNYWxvMAo=
+kind: Secret
+metadata:
+  name: mysecret
+  namespace: kube-system
