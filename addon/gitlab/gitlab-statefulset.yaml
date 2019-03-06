@@ -33,6 +33,7 @@ spec:
       - name: gitlab
         image: sameersbn/gitlab:11.8.0
         env:
+        # 配置参考该容器中/etc/docker-gitlab/runtime/env-defaults文件
         #- name: TZ
         #  value: Asia/BeiJing
         #- name: GITLAB_TIMEZONE
