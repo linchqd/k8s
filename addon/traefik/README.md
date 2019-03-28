@@ -1,3 +1,5 @@
+# https://github.com/containous/traefik/releases/latest
+
 # traefik_ui_auth.yaml:
 
     htpasswd -c auth admin
